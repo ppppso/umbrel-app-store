@@ -7,7 +7,7 @@ services:
       APP_PORT: 8080
 
   server:
-    image: ghcr.io/ppppso/mega-backup:1.0.0@sha256:0000000000000000000000000000000000000000000000000000000000000000
+    image: ghcr.io/ppppso/mega-backup:1.0.0@sha256:9665c30d16cbb15010568759d84eb4e9ced86e51647dfcc1b26ed78136542b9e
     # The entrypoint starts as root only to fix folder ownership, then runs everything
     # as PUID:PGID.
     init: true
