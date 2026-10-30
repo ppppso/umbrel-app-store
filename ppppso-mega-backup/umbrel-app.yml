@@ -1,0 +1,82 @@
+manifestVersion: 2.0
+id: ppppso-mega-backup
+storage:
+  dataRoot: data
+folderAccess:
+  - id: mega-folder
+    name: MEGA folder
+    note: >-
+      A local copy of your MEGA folder, kept in two-way sync: changes here also change
+      on MEGA. Pick an empty folder, separate from the Backup folder.
+    mounts:
+      - service: server
+        targetPath: /data/current
+  - id: backup-folder
+    name: Backup folder
+    note: >-
+      Where the snapshots are kept (encrypted). Pick an empty folder, ideally on another
+      drive. It is kept if you uninstall the app.
+    mounts:
+      - service: server
+        targetPath: /data/repo
+  - id: umbrel-downloads:mega-restores
+    name: Restore folder
+    note: Restored files go here, each restore in its own new sub-folder.
+    mounts:
+      - service: server
+        targetPath: /data/restore
+environment:
+  - name: TZ
+    services:
+      - server
+    default: Etc/UTC
+    note: >-
+      Your time zone, e.g. Europe/Madrid or America/Argentina/Buenos_Aires. The nightly
+      backup runs at its set time in this zone.
+icon: https://raw.githubusercontent.com/ppppso/umbrel-app-store/master/ppppso-mega-backup/icon.svg
+category: files
+name: Backup for MEGA
+version: "1.0.0"
+tagline: Keep a MEGA folder in sync and back it up every night
+description: >-
+  Before you start: pick the MEGA folder and the Backup folder in this app's settings
+  in Umbrel. Then open the app and follow the setup page. The app has its own password,
+  shown on this page.
+
+
+  Backup for MEGA keeps a folder of your MEGA account in two-way sync with your Umbrel,
+  so you can see and change your files in Umbrel's Files app. Every night it takes a
+  snapshot of that folder with restic, so you can go back to any file as it was on an
+  earlier day, even after it was changed or deleted on MEGA.
+
+
+  - Log in to MEGA from the browser (two-factor authentication supported)
+
+  - Nightly snapshots, encrypted and deduplicated, kept for days and months
+
+  - Browse snapshots, compare them, download a file, or restore files and folders
+
+  - Guards against mass deletions: if too many files disappear at once, old snapshots
+  are not pruned until you check
+
+
+  Uses MEGAcmd by MEGA and restic. Not affiliated with MEGA.
+releaseNotes: ""
+developer: ppppso
+website: https://github.com/ppppso/mega-backup
+dependencies: []
+repo: https://github.com/ppppso/mega-backup
+support: https://github.com/ppppso/mega-backup/issues
+port: 2947
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+deterministicPassword: true
+permissions:
+  - STORAGE_DOWNLOADS
+backupIgnore:
+  - data/config/restic-cache/*
+  - data/config/logs/*
+submitter: ppppso
+submission: https://github.com/ppppso/umbrel-app-store

@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: ppppso-mega-backup_server_1
+      APP_PORT: 8080
+
+  server:
+    image: ghcr.io/ppppso/mega-backup:1.0.0@sha256:0000000000000000000000000000000000000000000000000000000000000000
+    # The entrypoint starts as root only to fix folder ownership, then runs everything
+    # as PUID:PGID.
+    init: true
+    restart: on-failure
+    # Give MEGAcmd time to save its state on shutdown.
+    stop_grace_period: 1m
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      # The app's own login (shown on the app's page in Umbrel).
+      APP_PASSWORD: ${APP_PASSWORD}
+      # Time zone for the nightly backup time; changeable in the app's settings.
+      TZ: Etc/UTC
+    volumes:
+      # MEGA session, restic password, settings, logs.
+      - ${APP_DATA_DIR}/data/config:/config
+      # Restore folder: a sub-folder of Downloads by default (changeable in settings).
+      - ${UMBREL_ROOT}/data/storage/downloads/mega-restores:/data/restore
+      # The MEGA folder (/data/current) and the Backup folder (/data/repo) have no
+      # default: the user picks them in the app's settings (folderAccess).
