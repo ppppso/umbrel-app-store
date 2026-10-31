@@ -6,8 +6,9 @@ folderAccess:
   - id: mega-folder
     name: MEGA folder
     note: >-
-      A local copy of your MEGA folder, kept in two-way sync: changes here also change
-      on MEGA. Pick an empty folder, separate from the Backup folder.
+      Local copies of your MEGA folders, each in its own sub-folder, kept in two-way
+      sync: changes here also change on MEGA. Pick an empty folder, separate from the
+      Backup folder.
     mounts:
       - service: server
         targetPath: /data/current
@@ -36,17 +37,17 @@ environment:
 icon: https://raw.githubusercontent.com/ppppso/umbrel-app-store/master/ppppso-mega-backup/icon.svg
 category: files
 name: Backup for MEGA
-version: "1.0.0"
-tagline: Keep a MEGA folder in sync and back it up every night
+version: "1.1.0"
+tagline: Keep MEGA folders in sync and back them up every night
 description: >-
   Before you start: pick the MEGA folder and the Backup folder in this app's settings
   in Umbrel. Then open the app and follow the setup page. The app has its own password,
   shown on this page.
 
 
-  Backup for MEGA keeps a folder of your MEGA account in two-way sync with your Umbrel,
-  so you can see and change your files in Umbrel's Files app. Every night it takes a
-  snapshot of that folder with restic, so you can go back to any file as it was on an
+  Backup for MEGA keeps one or more folders of your MEGA account in two-way sync with
+  your Umbrel, so you can see and change your files in Umbrel's Files app. Every night
+  it takes a snapshot of each folder with restic, so you can go back to any file as it was on an
   earlier day, even after it was changed or deleted on MEGA.
 
 
@@ -61,7 +62,12 @@ description: >-
 
 
   Uses MEGAcmd by MEGA and restic. Not affiliated with MEGA.
-releaseNotes: ""
+releaseNotes: >-
+  Sync several MEGA folders: add and remove them on the new Folders page. An existing
+  setup moves into a sub-folder named after its MEGA folder, without uploading or
+  downloading anything. Snapshots are shown per folder with a "Kept until" date, and you
+  can delete snapshots to free space. If MEGA stops a sync (for example the folder was
+  moved to MEGA's Rubbish bin), the status page says why and offers Resume.
 developer: ppppso
 website: https://github.com/ppppso/mega-backup
 dependencies: []
