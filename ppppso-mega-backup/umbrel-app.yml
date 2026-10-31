@@ -6,23 +6,23 @@ folderAccess:
   - id: mega-folder
     name: MEGA folder
     note: >-
-      Local copies of your MEGA folders, each in its own sub-folder, kept in two-way
-      sync: changes here also change on MEGA. Pick an empty folder, separate from the
-      Backup folder.
+      Your MEGA files, kept in two-way sync: changes here also change on MEGA. Each
+      MEGA folder you add in the app gets its own sub-folder here.
     mounts:
       - service: server
         targetPath: /data/current
   - id: backup-folder
     name: Backup folder
     note: >-
-      Where the snapshots are kept (encrypted). Pick an empty folder, ideally on another
-      drive. It is kept if you uninstall the app.
+      The nightly backups: encrypted snapshots of your MEGA files. If you have another
+      drive, put this folder there. It is kept if you uninstall the app.
     mounts:
       - service: server
         targetPath: /data/repo
   - id: umbrel-downloads:mega-restores
     name: Restore folder
-    note: Restored files go here, each restore in its own new sub-folder.
+    note: >-
+      Files you restore from a backup go here, each restore in its own new sub-folder.
     mounts:
       - service: server
         targetPath: /data/restore
@@ -40,9 +40,10 @@ name: Backup for MEGA
 version: "1.1.0"
 tagline: Keep MEGA folders in sync and back them up every night
 description: >-
-  Before you start: pick the MEGA folder and the Backup folder in this app's settings
-  in Umbrel. Then open the app and follow the setup page. The app has its own password,
-  shown on this page.
+  The app asks for three folders when you install it: the MEGA folder (your synced MEGA
+  files), the Backup folder (the snapshots, ideally on another drive) and the Restore
+  folder. You can change them later in this app's settings in Umbrel. Then open the app
+  and follow the setup page. The app has its own password, shown on this page.
 
 
   Backup for MEGA keeps one or more folders of your MEGA account in two-way sync with

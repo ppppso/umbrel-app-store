@@ -24,7 +24,11 @@ services:
     volumes:
       # MEGA session, restic password, settings, logs.
       - ${APP_DATA_DIR}/data/config:/config
-      # Restore folder: a sub-folder of Downloads by default (changeable in settings).
+      # The three folders default to sub-folders of Downloads, so the install dialog
+      # asks for each one; users can change them in the app's settings (folderAccess).
+      # MEGA folder: the synced MEGA files.
+      - ${UMBREL_ROOT}/data/storage/downloads/MEGA:/data/current
+      # Backup folder: the restic repository (snapshots).
+      - ${UMBREL_ROOT}/data/storage/downloads/mega-backup:/data/repo
+      # Restore folder: where restored files go.
       - ${UMBREL_ROOT}/data/storage/downloads/mega-restores:/data/restore
-      # The MEGA folder (/data/current) and the Backup folder (/data/repo) have no
-      # default: the user picks them in the app's settings (folderAccess).
